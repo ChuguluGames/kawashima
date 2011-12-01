@@ -1,1 +1,1 @@
-var application = new Application().initialize();
+window.application = new Application().initialize();
