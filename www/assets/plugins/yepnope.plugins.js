@@ -1,10 +1,10 @@
 var prefixes = [
   {name: "lib", path: "assets/libs/"},
   {name: "plugin", path: "assets/plugins/"},
-  {name: "acss", path: "assets/stylesheets/"},  
-  {name: "tool", path: "assets/tools/"},    
+  {name: "acss", path: "assets/stylesheets/"},
+  {name: "tool", path: "assets/tools/"},
   {name: "src", path: "src/"},
-  {name: "app", path: "src/app/"}       
+  {name: "app", path: "src/app/"}
 ], i = prefixes.length, prefix;
 
 while(i--) {
@@ -16,7 +16,7 @@ while(i--) {
       resource.url = path + resource.url;
       return resource;
     });
-  })(prefix.name, prefix.path);  
+  })(prefix.name, prefix.path);
   
 }
 
