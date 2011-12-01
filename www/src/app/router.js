@@ -14,5 +14,4 @@ var Router = Backbone.Router.extend({
 
 		yepnope("src!" + arguments[0] + "/loader.js");
 	}
-
 });
