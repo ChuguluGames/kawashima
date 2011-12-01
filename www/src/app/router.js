@@ -12,7 +12,7 @@ var Router = Backbone.Router.extend({
 		  return false;
 		}
 
-		loader.load("src!" + arguments[0] + "/loader.js");
+		yepnope("src!" + arguments[0] + "/loader.js");
 	}
 
 });

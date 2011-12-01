@@ -1,4 +1,4 @@
-loader.load([
+yepnope([
   { load: "tool!layer.tool.js"},  
   { load: "tool!animate.tool.js"},    
   { load: "src!home/home.style.css"},  
