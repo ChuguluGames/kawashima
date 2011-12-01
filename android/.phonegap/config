@@ -1,0 +1,5 @@
+VERSION=1.2.0
+PROJECT_PATH=/Users/davidbillamboz/Projects/TriviaseriesTests/android
+PACKAGE=com.phonegap.triviaseriestests
+ACTIVITY=TriviaseriesTests
+TARGET=23
