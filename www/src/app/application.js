@@ -1,33 +1,36 @@
 var Application = function() {
-  return {
-    container: null,
-    router: null,
-    
-    initialize: function() {
-      var a = this;
+  var container = null;
+  var router = null;
 
-  		// on dom ready
-  		$(function() {
+  var initialize = function() {
+    var a = this;
 
-        // create container
-        a.container = $("<div />", {
-          id: "container"
-        });
-        $("body").prepend(a.container);     
-        
-        a.initializeRouter();     
-  		});
-  		
-  		return a;
-    },
-    
-    initializeRouter: function() {
-      this.router = new Router();
+    // on dom ready
+    $(function() {
+
+      // create container
+      a.container = $("<div />", {
+        id: "container"
+      });
+      $("body").prepend(a.container);     
       
-  		// let's start the history
-  		Backbone.history.start({
-  			pushState: false // cant use pushState on local? ie: see base with index.html
-  		});   
-    }    
+      a.initializeRouter();     
+    });
+    
+    return a;
+  };
+
+  var initializeRouter = function() {
+    this.router = new Router();
+    
+    // let's start the history
+    Backbone.history.start({
+      pushState: false // cant use pushState on local? ie: see base with index.html
+    });
+  };
+
+  return {
+    initialize: initialize,
+    initializeRouter: initializeRouter
   }
 };
