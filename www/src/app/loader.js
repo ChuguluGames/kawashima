@@ -1,13 +1,12 @@
-yepnope([
-  // stylesheets
-  { load: "acss!reset.css" },  
-  { load: "acss!global.css" },    
-  // libraries
-  { load: "lib!jquery-1.7.min.js" },
-  { load: "lib!underscore-1.2.0.js" },    
-  { load: "lib!backbone-0.5.3.js" },  
-  // sources
-  { load: "app!router.js" },  
-  { load: "app!application.js" },
-  { load: "app!main.js" },   
-]);
+yepnope({ 
+  load: [
+    // stylesheets
+    "acss!reset.css", "acss!global.css",
+    
+    // libraries
+    "lib!jquery-1.7.min.js", "lib!underscore-1.2.0.js", "lib!backbone-0.5.3.js",
+    
+    // sources
+    "app!router.js", "app!application.js", "app!main.js"
+  ]
+});

@@ -1,36 +1,20 @@
-var Application = function() {
-  var container = null;
-  var router = null;
+// http://jsperf.com/object-literal-vs-constructed
+function Application(container, router) {
+  this.container = container || this.container;
+  this.router = router || this.router;
+}
 
-  var initialize = function() {
-    var a = this;
+Application.prototype.initialize = function() {
+  var a = this;
+  
+  $("body").prepend(a.container);
+  a.initializeRouter();
+  
+  return a;
+}
 
-    // on dom ready
-    $(function() {
-
-      // create container
-      a.container = $("<div />", {
-        id: "container"
-      });
-      $("body").prepend(a.container);     
-      
-      a.initializeRouter();     
-    });
-    
-    return a;
-  };
-
-  var initializeRouter = function() {
-    this.router = new Router();
-    
-    // let's start the history
-    Backbone.history.start({
-      pushState: false // cant use pushState on local? ie: see base with index.html
-    });
-  };
-
-  return {
-    initialize: initialize,
-    initializeRouter: initializeRouter
-  }
+Application.prototype.initializeRouter = function() {
+  Backbone.history.start({
+    pushState: false // cant use pushState on local? ie: see base with index.html
+  });
 };

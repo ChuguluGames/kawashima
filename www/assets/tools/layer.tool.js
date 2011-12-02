@@ -1,11 +1,8 @@
-var Layer = function(params) {
-  var layer = $("<canvas />", {
-    id: params.id
-  })[0];
-  layer.width = params.width;
-  layer.height = params.height;
+function Layer(id, width, height) {
+  this.canvas  = $("<canvas />", { id: id })[0];
+  this.canvas.width   = width;
+  this.canvas.height  = height;
+  this.canvas.context = this.canvas.getContext("2d");
 
-  layer.context = layer.getContext("2d")
-
-  return layer;
+  return this.canvas;
 }
