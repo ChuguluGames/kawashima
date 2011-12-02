@@ -2,7 +2,7 @@ function HomeView() {
   this.current = 0;
   this.screen = {};
   this.frequence_refresh = (1000/30);
-  this.courbe_speed = 1000;
+  this.curve_speed = 1000;
 };
 
 HomeView.prototype.initialize = function () {
@@ -15,7 +15,7 @@ HomeView.prototype.getScreen = function() {
   this.screen.height = $(window).height();
   this.screen.paddingLeft = Math.round(this.screen.width * 0.04)
   this.screen.paddingBottom = Math.round(this.screen.height * 0.04)
-  this.screen.amplitudeCourbe = Math.round(this.screen.height * 0.3)
+  this.screen.amplitudeCurve = Math.round(this.screen.height * 0.3)
   this.screen.widthPadded = this.screen.width - this.screen.paddingLeft
   this.screen.heightPadded = this.screen.height - this.screen.paddingBottom;
 };
@@ -24,17 +24,17 @@ HomeView.prototype.render = function() {
   // create the grid layer
   this.grid = new Layer("canvas-grid", this.screen.width, this.screen.height);
 
-  // create the courbe layer
-  this.courbe = new Layer("canvas-courbe", this.screen.widthPadded, this.screen.heightPadded);
-  $(this.courbe).css({ left: this.screen.paddingLeft + "px" });
+  // create the curve layer
+  this.curve = new Layer("canvas-curve", this.screen.widthPadded, this.screen.heightPadded);
+  $(this.curve).css({ left: this.screen.paddingLeft + "px" });
 
   application.container.append(
     $("<div />", { id: "page_home" }).append(this.grid)
-                                     .append(this.courbe)
+                                     .append(this.curve)
   );
 
   this.createGrid();
-  this.createCourbe();
+  this.createCurve();
 };
 
 HomeView.prototype.createGrid = function() {
@@ -68,16 +68,16 @@ HomeView.prototype.createGrid = function() {
   }
 };
 
-HomeView.prototype.createCourbe = function() {
+HomeView.prototype.createCurve = function() {
   this.current = 0;
 
-  // clear canvas courbe
-  this.courbe.context.clearRect(0, 0, this.screen.widthPadded, this.screen.heightPadded);
-  this.courbe.width = this.courbe.width;
+  // clear canvas curve
+  this.curve.context.clearRect(0, 0, this.screen.widthPadded, this.screen.heightPadded);
+  this.curve.width = this.curve.width;
 
-  // get the points of the courbe
+  // get the points of the curve
   this.generatePoints();
-  // add the point to the courbe
+  // add the point to the curve
   this.addPoint();
 };
 
@@ -89,7 +89,7 @@ HomeView.prototype.generatePoints = function() {
   this.points = [];
        
   for(var i = 0; i <= 10; i++) {
-    y = Math.floor(Math.random() * this.screen.heightPadded - this.screen.amplitudeCourbe) + this.screen.amplitudeCourbe;
+    y = Math.floor(Math.random() * this.screen.heightPadded - this.screen.amplitudeCurve) + this.screen.amplitudeCurve;
 
     this.points.push({
       x: x,
@@ -100,12 +100,12 @@ HomeView.prototype.generatePoints = function() {
   }
 };
 
-HomeView.prototype.updateCourbe = function() {
-  var context = this.courbe.context,
+HomeView.prototype.updateCurve = function() {
+  var context = this.curve.context,
       clearFrom = this.currentPosition.y > this.newPosition.y ? this.newPosition.y : this.currentPosition.y;
 
   // clear specific zone
-  this.courbe.context.clearRect(
+  this.curve.context.clearRect(
     this.currentPosition.x,
     clearFrom,
     this.newPosition.x - this.currentPosition.x,
@@ -133,18 +133,18 @@ HomeView.prototype.addPoint = function() {
   this.newPosition = $.extend(true, {}, this.currentPosition);
 
   animate(this.newPosition, this.points[this.current + 1], {
-    duration: self.courbe_speed,
+    duration: self.curve_speed,
     frames:   self.frequence_refresh,
     easing: "easeInOutQuad",
     step: function() {
-      self.updateCourbe();
+      self.updateCurve();
     },
     complete: function() {
       self.current++;
 
-      // courbe finished
+      // curve finished
       if(self.current == self.points.length - 1) {
-        self.createCourbe(); // create a new one
+        self.createCurve(); // create a new one
       } else {
         self.addPoint(); // add the next point
       }
